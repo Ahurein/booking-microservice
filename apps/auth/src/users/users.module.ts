@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { DatabaseModule } from '@app/common';
 import { UserDocument, UserSchema } from './models/user.schema';
 import { UserRepository } from './user.repository';
+import { JwtStrategy } from '../strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { UserRepository } from './user.repository';
     DatabaseModule.forFeature([{name: UserDocument.name, schema: UserSchema}])
   ],
   controllers: [UsersController],
-  providers: [UsersService, UserRepository]
+  providers: [UsersService, UserRepository],
+  exports: [UsersService]
 })
 export class UsersModule {}
