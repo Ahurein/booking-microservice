@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class NotificationsService {
-  constructor(private readonly configService: ConfigService){}
+  constructor(private readonly configService: ConfigService) { }
 
   private readonly transporter = nodemailer.createTransport({
     service: "gmail",
@@ -19,12 +19,12 @@ export class NotificationsService {
   })
 
 
-  async notifyEmail({email}: NotifyEmailDto){
+  async notifyEmail({ email, text }: NotifyEmailDto) {
     await this.transporter.sendMail({
       from: this.configService.get("SMTP_USER"),
       to: email,
       subject: 'Sleepr Notification',
-      text: "Test ts"
+      text
     })
     console.log("email sent")
   }

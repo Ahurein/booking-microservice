@@ -1,5 +1,4 @@
-import { IsString, IsStrongPassword } from "class-validator"
-import { string } from "joi"
+import { IsArray, IsNotEmpty, IsOptional, IsString, IsStrongPassword, isNotEmpty } from "class-validator"
 
 export class CreateUserDto {
     @IsString()
@@ -7,4 +6,10 @@ export class CreateUserDto {
 
     @IsStrongPassword({})
     password: string
+
+    @IsOptional()
+    @IsArray()
+    @IsString({each: true})
+    @IsNotEmpty({each: true})
+    roles?: string[]
 }
